@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.mortbay.jetty:cometd-api:0.9.20080221">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mortbay/jetty/cometd-api/0.9.20080221/cometd-api-0.9.20080221.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mortbay/jetty/cometd-api/0.9.20080221/cometd-api-0.9.20080221-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mortbay/jetty/cometd-api/0.9.20080221/cometd-api-0.9.20080221-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

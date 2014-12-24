@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: webmacro:webmacro:1.1final">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/webmacro/webmacro/1.1final/webmacro-1.1final.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/webmacro/webmacro/1.1final/webmacro-1.1final-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/webmacro/webmacro/1.1final/webmacro-1.1final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

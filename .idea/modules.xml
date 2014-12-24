@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/erp_wie.iml" filepath="$PROJECT_DIR$/erp_wie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-TemplateEngine/wie-TemplateEngine.iml" filepath="$PROJECT_DIR$/wie-TemplateEngine/wie-TemplateEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-common/wie-common.iml" filepath="$PROJECT_DIR$/wie-common/wie-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-controler/wie-controler.iml" filepath="$PROJECT_DIR$/wie-controler/wie-controler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-core/wie-core.iml" filepath="$PROJECT_DIR$/wie-core/wie-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-dynamic/wie-dynamic.iml" filepath="$PROJECT_DIR$/wie-dynamic/wie-dynamic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-frameworkbase/wie-frameworkbase.iml" filepath="$PROJECT_DIR$/wie-frameworkbase/wie-frameworkbase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-service_erp/wie-service_erp.iml" filepath="$PROJECT_DIR$/wie-service_erp/wie-service_erp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-service_permission/wie-service_permission.iml" filepath="$PROJECT_DIR$/wie-service_permission/wie-service_permission.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-tree/wie-tree.iml" filepath="$PROJECT_DIR$/wie-tree/wie-tree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wie-web/wie-web.iml" filepath="$PROJECT_DIR$/wie-web/wie-web.iml" />
+    </modules>
+  </component>
+</project>

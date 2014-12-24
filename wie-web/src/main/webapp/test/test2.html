@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/js/easyui/themes/icon.css">
+	<script type="text/javascript" src="/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/easyui/jquery.easyui.min.js"></script>
+	<script src="/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#tg").click(function(){
+				var sqlstr=$("#sql").val();
+					$.post("product/clientfnProduct.tg",{sqlStr:sqlstr},function(data){
+						if(data) {
+							if ($('#_tab')) {
+								$('#result').append('<table id="_tab"></table>');
+							}
+							$("#_tab").append('<tr><td>' + data + '</td><td>' + current() + '</td></tr>');
+						}
+					})
+			});
+
+			$("#clear").click(function(){
+				$('#_tab').remove();
+			});
+		});
+		function current(){
+			var d=new Date(),str='';
+			str +=d.getFullYear()+'年'; //获取当前年份
+			str +=d.getMonth()+1+'月'; //获取当前月份（0——11）
+			str +=d.getDate()+'日';
+			str +=d.getHours()+'时';
+			str +=d.getMinutes()+'分';
+			str +=d.getSeconds()+'秒';
+			return str; }
+	</script>
+	<style>
+		#main{ margin: auto}
+		#left{width: 30%;height: auto;float:left}
+		#result{width: 70%;height: auto;float: right}
+		#_tab table{border: none;border-collapse: collapse;}
+	</style>
+</head>
+<body>
+<div id="main">
+	<div id="left">
+		<form action="product/clientfnProduct.tg" method="post">
+			<textarea rows="10" cols="60" name="sqlStr" id="sql"></textarea>
+		</form>
+		<button id="tg">获得数据</button>
+		<button id="clear">清空</button>
+	</div>
+	<div id="result"></div>
+</div>
+</body>
+</html>

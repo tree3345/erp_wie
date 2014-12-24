@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+ <head>  
+  <title> New Document </title>  
+  <meta name="Generator" content="EditPlus">  
+  <meta name="Author" content="">  
+  <meta name="Keywords" content="">  
+  <meta name="Description" content="">  
+  <script>  
+var url = 'http://localhost:88/test/test.jsp';  
+var bigData = '此处为大数据';  
+var html = '<form action="'+url+'" method="post" target="_self" id="postData_form">'+  
+           '<input id="bigData" name="bigData" type="hidden" value="'+bigData+'"/>'+  
+           '</form>';  
+  
+document.getElementById('myIFrame').contentWindow.document.wirte(html);  
+document.getElementById('myIFrame').contentWindow.document.getElementById('postData_form').submit();  
+  
+  
+  </script>  
+ </head>  
+  
+ <body>  
+  <iframe id="myIFrame"  src="about:blank"  width="100%" height="200px" noresize>  
+  
+  </iframe>  
+ </body>  
+</html>  

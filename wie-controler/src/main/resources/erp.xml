@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+  <struts>
+  <!-- 产品信息 -->
+	<package name="product" namespace="/product" extends="struts-default">
+		<action name="*Product" method="{1}" class="productControl">
+			<result>/views/erp/product/index.jsp</result>
+			<result name="flag">/views/erp/product/eindex.jsp</result>
+			<result name="online">/views/erp/product/online.jsp</result>
+			<result name="querygood">/views/erp/_public/_queryGood.jsp</result>
+			<result name="mgr">/views/erp/product/mgrIndex.jsp</result>
+		</action>
+		<action name="*SelfSp" method="{1}" class="productStoreControl">
+			<result>/views/erp/product/pindex.jsp</result>
+		</action>
+	</package>
+		<package name="class" namespace="/class" extends="struts-default">
+		<action name="*Class" method="{1}" class="classControl">
+			<result>/views/erp/class/index.jsp</result>
+		</action>
+		<action name="*Category" method="{1}" class="categoryControl">
+		</action>
+	</package>
+	<package name="purchase" namespace="/purchase" extends="struts-default">
+		<action name="*Purchase" method="{1}" class="purchaseControl">
+			<result>/views/erp/purchase/index.jsp</result>
+			<result name="create">/views/erp/purchase/create.jsp</result>
+			<result name="edit">/views/erp/purchase/edit.jsp</result>
+			<result name="statistics">/views/erp/purchase/statistics/index.jsp</result>
+			<result name="showChart">/views/erp/purchase/statistics/chart.jsp</result>
+		</action>
+		<action name="*PurDetail" method="{1}" class="purchaseDetailControl">
+		</action>
+	</package>
+	<package name="inventory" namespace="/inventory" extends="struts-default">
+		<action name="*Inventory" method="{1}" class="inventoryControl">
+			<result>/views/erp/inventory/index.jsp</result>
+			<result name="create">/views/erp/inventory/create.jsp</result>
+			<result name="edit">/views/erp/inventory/edit.jsp</result>
+			<result name="damageGoods">/views/erp/inventory/statistics/index.jsp</result>
+			<result name="showChart">/views/erp/inventory/statistics/chart.jsp</result>
+		</action>
+        <action name="*VDetail" method="{1}" class="inventoryDetailControl">
+        </action>
+	</package>
+    <package name="abc" namespace="/abc" extends="struts-default">
+        <action name="*Abc" method="{1}" class="abcControl">
+            <result>/test/index.jsp</result>
+        </action>
+    </package>
+	<package name="warehouse" namespace="/warehouse" extends="struts-default">
+		<action name="*Warehouse" method="{1}" class="warehouseControl">
+		</action>
+		<action name="*WareDetail" method="{1}" class="warehouseDetailControl">
+		  <result>/views/erp/warehouse/eindex.jsp</result>
+		</action>
+	</package>
+	
+	<package name="priceHistory" namespace="/priceHistory" extends="struts-default">
+		<action name="*PriceHistory" method="{1}" class="priceHistoryControl">
+		<result>/views/erp/priceHistory/index.jsp</result>
+		<result name="showChart">/views/erp/priceHistory/chart.jsp</result>
+		</action>
+	</package>
+	<package name="bill" namespace="/bill" extends="struts-default">
+		<action name="*Bill" method="{1}" class="billControl">
+		<result>/views/erp/bill/index.jsp</result>
+		<result name="statistics">/views/erp/bill/statistics/index.jsp</result>
+		<result name="showChart">/views/erp/bill/statistics/chart.jsp</result>
+        <result name="profit">/views/erp/bill/profit/index.jsp</result>
+		</action>
+		<action name="*BDetail" method="{1}" class="billDetailControl">
+		<result>/views/erp/bill/eindex.jsp</result>
+		</action>
+	</package>
+	<package name="payment" namespace="/payment" extends="struts-default">
+		<action name="*PayableAccount" method="{1}" class="payableAccountControl">
+		<result>/views/erp/finance/index.jsp</result>
+		</action>
+		<action name="*Payment" method="{1}" class="paymentControl">
+		<result>/views/erp/payment/index.jsp</result>
+		<result name="create">/views/erp/payment/create.jsp</result>
+		<result name="edit">/views/erp/payment/edit.jsp</result>
+		<result name="pl">/views/erp/payment/plindex.jsp</result>
+		</action>
+	</package>
+	<package name="orderIn" namespace="/orderIn" extends="struts-default">
+		<action name="*OrderIn" method="{1}" class="orderInControl">
+		<result>/views/erp/orderIn/index.jsp</result>
+		<result name="create">/views/erp/orderIn/create.jsp</result>
+		<result name="edit">/views/erp/orderIn/edit.jsp</result>
+		</action>
+		<action name="*ODetail" method="{1}" class="OrderDetailInControl">
+		<result>/views/erp/orderIn/eindex.jsp</result>
+		</action>
+	</package>
+	<package name="store" namespace="/store" extends="struts-default">
+		<action name="*Store" method="{1}" class="storeControl">
+		<result>/views/erp/store/index.jsp</result>
+		</action>
+	</package>
+	<package name="intercourse" namespace="/intercourse" extends="struts-default">
+		<action name="*Intercourse" method="{1}" class="intercourseControl">
+		<result>/views/erp/intercourse/index.jsp</result>
+		</action>
+		<action name="*InterType" method="{1}" class="intercourseTypeControl">
+		<result>/views/erp/intercoursetype/index.jsp</result>
+		</action>
+	</package>
+    <package name="errors" namespace="/errors" extends="struts-default">
+        <action name="*Errors" method="{1}" class="errorsControl">
+            <result>/views/erp/errors/index.jsp</result>
+        </action>
+    </package>
+	<constant name="struts.multipart.maxSize" value="104857600" />
+	 <constant name="struts.multipart.saveDir " value="d:/tmp" />
+	 <constant name="struts.i18n.encoding" value="UTF-8" />
+  </struts>

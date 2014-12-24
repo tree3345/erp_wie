@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <!--电子称权限-->
+    <!-- 用户-->
+    <package name="employee" namespace="/employee" extends="struts-default">
+        <action name="*Employee" method="{1}" class="employeeControl">
+            <result>/views/panel/employee/index.jsp</result>
+        </action>
+    </package>
+    <!--角色-->
+    <package name="erole" namespace="/erole" extends="struts-default">
+        <action name="*Erole" method="{1}" class="eroleControl">
+            <result>/views/panel/erole/index.jsp</result>
+        </action>
+    </package>
+    <!--模块-->
+    <package name="module" namespace="/module" extends="struts-default">
+        <action name="*Module" method="{1}" class="moduleControl">
+            <result>/views/panel/module/index.jsp</result>
+        </action>
+    </package>
+    <!--功能-->
+    <package name="function" namespace="/function" extends="struts-default">
+        <action name="*Function" method="{1}" class="functionControl">
+            <result>/views/panel/function/index.jsp</result>
+        </action>
+    </package>
+
+    <!--权限操作接口-->
+    <package name="panelPermission" namespace="/panelPermission" extends="struts-default">
+        <action name="*Permission" method="{1}" class="permissionControl">
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta charset="UTF-8"> <!-- 文件编码一定是UTF-8 -->
+	<title>价格曲线</title>
+	<meta name="description" content="Highcharts Exporting Server" />
+	<script type="text/javascript" src="/js/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="/js/highcharts/exporting.js"></script>
+	<script>
+	
+	$(function () {
+	   if([[Date.UTC(2014, 6, 2,11,3), 0.58],[Date.UTC(2014, 6, 2,11,7), 0.29],[Date.UTC(2014, 6, 2,11,9), 0.29],[Date.UTC(2014, 6, 29,13,39), 0.16],[Date.UTC(2014, 6, 29,15,38), 0.40],[Date.UTC(2014, 6, 29,15,41), 0.40],[Date.UTC(2014, 7, 4,14,32), 0.40],[Date.UTC(2014, 7, 4,15,4), 0.40],[Date.UTC(2014, 7, 5,9,26), 4.45],[Date.UTC(2014, 7, 5,9,28), 4.45],[Date.UTC(2014, 7, 7,10,15), 0.34],[Date.UTC(2014, 7, 9,13,31), 0.24],[Date.UTC(2014, 7, 9,13,32), 0.24],[Date.UTC(2014, 7, 9,13,33), 0.39],[Date.UTC(2014, 7, 9,13,34), 0.24],[Date.UTC(2014, 7, 9,13,38), 0.37],[Date.UTC(2014, 7, 9,16,49), 0.24]])
+		   chartLine();
+	});
+	function chartLine(){
+		 var chart = new Highcharts.Chart({
+		    	
+		        chart: {
+		            renderTo: 'container'
+		        },
+		        title: {
+		            text: '入库情况',
+		            x: -20 
+		        },
+		     
+		        xAxis: {
+		            type: 'datetime',
+		             labels: {
+		                formatter: function() {
+		                	console.log(this.value);
+		                               return  Highcharts.dateFormat('%Y-%m-%d %H:%M', this.value);
+		                },
+		                }
+		        },
+		        yAxis: [{ //第一个Y轴，序号为0
+		            labels: {
+		                format: '{value} ￥',
+		                style: {
+		                    color: '#89A54E'
+		                }
+		            },
+		            title: {
+		                text: '价格',
+		                style: {
+		                    color: '#89A54E'
+		                }
+		            }
+		        }, { //第二个Y轴，序号为1
+		            title: {
+		                text: '数量',
+		                style: {
+		                    color: '#4572A7'
+		                }
+		            },
+		            labels: {
+		                format: '{value} 斤',
+		                style: {
+		                    color: '#4572A7'
+		                }
+		            },
+		            opposite: true
+		        },{ //第三个Y轴，序号为2
+		            title: {
+		                text: '利润',
+		                style: {
+		                    color: '#FF0000'
+		                }
+		            },
+		            labels: {
+		                format: '{value} 元',
+		                style: {
+		                    color: '#FF0000'
+		                }
+		            },
+		            opposite: true
+		        }],
+		series: [{ //第三个Y轴的数据
+            name: '',
+            color: '#FF0000',
+            type: 'spline',
+            yAxis: 2,//坐标轴序号
+            data: [[Date.UTC(2014, 6, 2,11,3), 0.58],[Date.UTC(2014, 6, 2,11,7), 0.29],[Date.UTC(2014, 6, 2,11,9), 0.29],[Date.UTC(2014, 6, 29,13,39), 0.16],[Date.UTC(2014, 6, 29,15,38), 0.40],[Date.UTC(2014, 6, 29,15,41), 0.40],[Date.UTC(2014, 7, 4,14,32), 0.40],[Date.UTC(2014, 7, 4,15,4), 0.40],[Date.UTC(2014, 7, 5,9,26), 4.45],[Date.UTC(2014, 7, 5,9,28), 4.45],[Date.UTC(2014, 7, 7,10,15), 0.34],[Date.UTC(2014, 7, 9,13,31), 0.24],[Date.UTC(2014, 7, 9,13,32), 0.24],[Date.UTC(2014, 7, 9,13,33), 0.39],[Date.UTC(2014, 7, 9,13,34), 0.24],[Date.UTC(2014, 7, 9,13,38), 0.37],[Date.UTC(2014, 7, 9,16,49), 0.24]],
+            tooltip: {
+                valueSuffix: ' 元'
+            }
+        },
+        { //第二个Y轴的数据
+		            name: '数量',
+		            color: '#4572A7',
+		            type: 'column',
+		            yAxis: 1,//坐标轴序号
+		            data: [[Date.UTC(2014, 6, 2,11,3), 0.58],[Date.UTC(2014, 6, 2,11,7), 0.29],[Date.UTC(2014, 6, 2,11,9), 0.29],[Date.UTC(2014, 6, 29,13,39), 0.16],[Date.UTC(2014, 6, 29,15,38), 0.40],[Date.UTC(2014, 6, 29,15,41), 0.40],[Date.UTC(2014, 7, 4,14,32), 0.40],[Date.UTC(2014, 7, 4,15,4), 0.40],[Date.UTC(2014, 7, 5,9,26), 4.45],[Date.UTC(2014, 7, 5,9,28), 4.45],[Date.UTC(2014, 7, 7,10,15), 0.34],[Date.UTC(2014, 7, 9,13,31), 0.24],[Date.UTC(2014, 7, 9,13,32), 0.24],[Date.UTC(2014, 7, 9,13,33), 0.39],[Date.UTC(2014, 7, 9,13,34), 0.24],[Date.UTC(2014, 7, 9,13,38), 0.37],[Date.UTC(2014, 7, 9,16,49), 0.24]],
+		            tooltip: {
+		                valueSuffix: ' 斤'
+		            }
+		        }, { //第一个Y轴的数据
+		            name: '价格',
+		            color: '#89A54E',
+		            type: 'spline',
+		            data: [[Date.UTC(2014, 6, 2,11,3), 3.1900],[Date.UTC(2014, 6, 2,11,7), 1.5950],[Date.UTC(2014, 6, 2,11,9), 1.5950],[Date.UTC(2014, 6, 29,13,39), 0.8800],[Date.UTC(2014, 6, 29,15,38), 2.2000],[Date.UTC(2014, 6, 29,15,41), 2.2000],[Date.UTC(2014, 7, 4,14,32), 2.2000],[Date.UTC(2014, 7, 4,15,4), 2.2000],[Date.UTC(2014, 7, 5,9,26), 24.4750],[Date.UTC(2014, 7, 5,9,28), 24.4750],[Date.UTC(2014, 7, 7,10,15), 1.8700],[Date.UTC(2014, 7, 9,13,31), 1.3200],[Date.UTC(2014, 7, 9,13,32), 1.3200],[Date.UTC(2014, 7, 9,13,33), 2.1450],[Date.UTC(2014, 7, 9,13,34), 1.3200],[Date.UTC(2014, 7, 9,13,38), 2.0350],[Date.UTC(2014, 7, 9,16,49), 1.3200]],
+		            tooltip: {
+		                valueSuffix: '￥'
+		            }
+		        }],
+		         tooltip: {  
+		            shared : true,
+		            xDateFormat: '%Y-%m-%d %H:%M'//鼠标移动到趋势线上时显示的日期格式  
+		        }
+		    
+		    });
+	}
+	
+	</script>
+</head>
+
+<body>
+	<div id="container" style="min-width:800px;height:400px"></div>
+</body>
+
+</html>

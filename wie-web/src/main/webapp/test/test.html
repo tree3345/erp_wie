@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/jquery-1.6.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#tg").click(function(){
+		 $.post("product/clientfnProduct.tg",{sqlStr:$("#sql").val()},function(data){
+			$("#result").text(data);
+		}) 
+	})
+})
+
+</script>
+</head>
+<body align="center">
+<form action="product/clientfnProduct.tg" method="post">
+
+    <textarea rows="10" cols="60" name="sqlStr" id="sql"></textarea>
+</form>
+<button id="tg">获得数据</button>
+<div ><span id="result"></span></div>
+</body>
+</html>

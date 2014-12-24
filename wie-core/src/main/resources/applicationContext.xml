@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+					http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+					http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+					http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+					http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="true">
+
+	<!-- 使Spring关注Annotation -->
+	<context:annotation-config />
+	<!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
+	<context:component-scan base-package="com.wie" />
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:init.properties</value>
+		</property>
+	</bean>
+	
+	<!-- apache dbcp连接池配置-->
+	<bean id="dataSource_mysql"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="${dataSource_mysql.driverClassName}" />
+		<property name="url" value="${dataSource_mysql.url}" />
+		<property name="username" value="${dataSource_mysql.username}" />
+		<property name="password" value="${dataSource_mysql.password}" />
+	</bean>
+	
+	<bean id="dataSource_oracle"
+		class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close">
+		<property name="driverClassName"
+			value="${dataSource_oracle.driverClassName}" />
+		<property name="url" value="${dataSource_oracle.url}" />
+		<property name="username" value="${dataSource_oracle.username}" />
+		<property name="password" value="${dataSource_oracle.password}" />
+	</bean>
+	
+	<bean id="dataSource_mssql"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="${dataSource_mssql.driverClassName}" />
+		<property name="url" value="${dataSource_mssql.url}" />
+		<property name="username" value="${dataSource_mssql.username}" />
+		<property name="password" value="${dataSource_mssql.password}" />
+	</bean>
+
+    <bean id="dynamicDataSource" class="com.wie.basic.datasource.DynamicDataSource" >  
+        <!-- 通过key-value的形式来关联数据源 -->  
+        <property name="targetDataSources">  
+            <map key-type="java.lang.String">  
+                <entry value-ref="dataSource_mysql" key="dataSource_mysql"></entry>  
+                <entry value-ref="dataSource_oracle" key="dataSource_oracle"></entry>
+                <entry value-ref="dataSource_mssql" key="dataSource_mssql"></entry>   
+            </map>  
+        </property>  
+        <property name="defaultTargetDataSource" ref="dataSource_mssql" >
+        </property>  
+    </bean>   
+    
+	<!--Hibernate Annotation SessionFatory-->
+	<bean id="mySQLSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dynamicDataSource"/>
+        <property name="packagesToScan">
+			<list>
+				<value>com.**.model</value>
+			</list>
+		</property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!-- 链接释放策略 on_close | after_transaction | after_statement | auto  -->
+               <!--  <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="oracleSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dynamicDataSource"/>
+        <property name="packagesToScan">
+			<list>
+				<value>com.**.model</value>
+			</list>
+		</property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <!--prop key="hibernate.hbm2ddl.auto">update</prop-->
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="mssqlSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dynamicDataSource"/>
+        <property name="packagesToScan">
+			<list>
+				<value>com.**.model</value>
+			</list>
+		</property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+               <!--  <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+            </props>
+        </property>
+    </bean>
+    
+	<bean id="sessionFactory" class="com.wie.basic.sessionFactory.DynamicSessionFactoryImpl">
+		<property name="defaultTargetSessionFactory" ref="mssqlSessionFactory"/>
+        <property name="targetSessionFactorys">
+            <map>     
+                <entry value-ref="oracleSessionFactory" key="dataSource_oracle"/>
+                <entry value-ref="mySQLSessionFactory" key="dataSource_mysql"/>
+                <entry value-ref="mssqlSessionFactory" key="dataSource_mssql"/>
+            </map> 
+        </property>
+        
+	</bean>
+	
+	 <bean id="dataSourceMethodInterceptor" class="com.wie.basic.datasource.interceptor.DataSourceMethodInterceptor"/>
+    
+    <!-- 参与动态切换数据源的切入点对象 (切入点对象，确定何时何地调用拦截器) -->
+    <bean id="methodCachePointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <!-- 配置缓存aop切面 -->
+        <property name="advice" ref="dataSourceMethodInterceptor" />
+        <!-- 配置哪些方法参与缓存策略 -->
+        <!--  
+            .表示符合任何单一字元                  
+            ###  +表示符合前一个字元一次或多次                  
+            ###  *表示符合前一个字元零次或多次                  
+            ###  \Escape任何Regular expression使用到的符号                  
+        -->                 
+        <!-- .*表示前面的前缀(包括包名) 表示print方法-->
+        <property name="patterns">
+            <list>
+                <value>com.wie.*.biz.*Service*\.*.*</value>
+                <value>com.wie.*.mapper.*Mapper*\.*.*</value>
+            </list>
+        </property>
+    </bean>
+
+
+	<!--Hibernate TransactionManager-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务的传播特性 -->
+		<tx:advice id="txAdvice"
+			transaction-manager="transactionManager">
+			<tx:attributes>
+				<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+				<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+				<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+				<tx:method name="*" read-only="false" />
+			</tx:attributes>
+		</tx:advice>
+
+	<!-- 那些类的哪些方法参与事务 -->
+	<aop:config>
+		<aop:pointcut id="allServiceMethod"
+			expression="execution(* com.wie..*Service.*(..))" />
+		<aop:advisor pointcut-ref="allServiceMethod"
+			advice-ref="txAdvice" />
+	</aop:config>
+	
+	
+	<!-- log日志切面 -->
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="LogInterceptor">
+			<aop:around pointcut="${save} or ${update} or ${delte}" method="invoke"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="LogInterceptor" class="com.wie.permissions.interceptor.LogInterceptor"></bean>
+
+    <bean id="ftlPath" class="java.lang.String">
+        <constructor-arg value="/ftl"/>
+    </bean>
+
+    <bean id="outPath" class="java.lang.String">
+        <constructor-arg value="/test"/>
+    </bean>
+<!--jbpm4.4工作流  -->   
+	<!-- <bean id="springHelper" class="org.jbpm.pvm.internal.processengine.SpringHelper">   
+	        <property name="jbpmCfg" value="spring-jbpm4.cfg.xml" />
+	            
+	</bean>   
+	<bean id="processEngine" factory-bean="springHelper"  factory-method="createProcessEngine" /> --> 
+</beans>
